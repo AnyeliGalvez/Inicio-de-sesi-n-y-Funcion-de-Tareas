@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="task_red_pending">#E40202</color>
+    <color name="task_green_done">#01AC07</color>
 </resources>
