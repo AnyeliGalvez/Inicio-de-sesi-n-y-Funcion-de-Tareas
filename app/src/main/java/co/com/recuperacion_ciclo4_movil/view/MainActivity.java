@@ -41,14 +41,12 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
     private void initUI() {
         tilNewTask = findViewById(R.id.til_new_task);
-        tilNewTask.setEndIconOnClickListener(v -> {
-            Toast.makeText(MainActivity.this, "Add new task to list", Toast.LENGTH_SHORT)
-                    .show();
-        });
+        tilNewTask.setEndIconOnClickListener(v -> presenter.addNewTask());
 
         etNewTask = findViewById(R.id.et_new_task);
 
         taskAdapter = new TaskAdapter();
+        taskAdapter.setListener(item -> presenter.taskItemClicked(item));
         rvTasks = findViewById(R.id.rv_tasks);
         rvTasks.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         rvTasks.setAdapter(taskAdapter);
@@ -58,5 +56,20 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
     @Override
     public void showTaskList(List<TaskItem> items) {
         taskAdapter.setData(items);
+    }
+
+    @Override
+    public String getTaskDescription() {
+        return etNewTask.getText().toString();
+    }
+
+    @Override
+    public void addTaskToList(TaskItem task) {
+        taskAdapter.addItem(task);
+    }
+
+    @Override
+    public void updateTask(TaskItem task) {
+        taskAdapter.updateTask(task);
     }
 }
