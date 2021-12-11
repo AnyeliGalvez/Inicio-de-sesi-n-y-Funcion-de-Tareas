@@ -1,4 +1,4 @@
-package co.com.recuperacion_ciclo4_movil;
+package co.com.recuperacion_ciclo4_movil.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import co.com.recuperacion_ciclo_4m.R;
+import co.com.recuperacion_ciclo4_movil.R;
+import co.com.recuperacion_ciclo4_movil.view.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
     ImageView RClogo;
