@@ -1,5 +1,9 @@
 package co.com.recuperacion_ciclo4_movil.presenter;
 
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import co.com.recuperacion_ciclo4_movil.model.MainInteractor;
@@ -27,6 +31,13 @@ public class MainPresenter implements MainMVP.Presenter {
 
     @Override
     public void addNewTask() {
+        Log.i(MainPresenter.class.getSimpleName(), "Add new task");
+        String description = view.getTaskDescription();
+        String date = SimpleDateFormat.getDateInstance().format(new Date());
+
+        TaskItem task = new TaskItem(description, date);
+        model.saveTask(task);
+        view.addTaskToList(task);
 
     }
 }

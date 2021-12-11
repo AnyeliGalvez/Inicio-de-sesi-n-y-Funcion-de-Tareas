@@ -1,5 +1,6 @@
 package co.com.recuperacion_ciclo4_movil.view.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.com.recuperacion_ciclo4_movil.R;
+import co.com.recuperacion_ciclo4_movil.presenter.MainPresenter;
 import co.com.recuperacion_ciclo4_movil.view.dto.TaskItem;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
@@ -28,6 +30,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     public void addItem(TaskItem item) {
+        Log.i(TaskAdapter.class.getSimpleName(), "Add new item");
         data.add(item);
         notifyItemInserted(data.size() - 1);
     }
