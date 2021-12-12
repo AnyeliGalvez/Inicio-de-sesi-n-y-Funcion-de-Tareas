@@ -59,7 +59,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         if(listener != null){
             holder.itemView.setOnClickListener(v -> listener.onClick(item));
         }
-
         holder.tvDescription.setText(item.getDescription());
         holder.tvDate.setText(item.getDate());
         int color =   item.getState() == TaskState.PENDING ? R.color.task_red_pending : R.color.task_green_done;
@@ -76,16 +75,20 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     public void updateTask(TaskItem task) {
-        for (int i = 0; i < data.size(); i++) {
-            TaskItem item = data.get(i);
-            if (item.getDescription().equals(task.getDescription())
-            && item.getDate().equals(task.getDate())){
-                item.setState(task.getState());
-                notifyItemChanged(i);
-                break;
-            }
-            }
+        int i = data.indexOf(task);
+        TaskItem item = data.get(i);
+        item.setState(task.getState());
+        notifyItemChanged(i);
+
     }
+
+    public void removeTask(TaskItem task) {
+        int i = data.indexOf(task);
+        data.remove(i);
+        notifyItemRemoved(i);
+
+    }
+
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView ivIcon;

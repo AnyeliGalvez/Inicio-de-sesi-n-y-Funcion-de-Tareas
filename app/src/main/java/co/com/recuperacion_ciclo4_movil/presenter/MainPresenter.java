@@ -8,14 +8,13 @@ import java.util.List;
 
 import co.com.recuperacion_ciclo4_movil.model.MainInteractor;
 import co.com.recuperacion_ciclo4_movil.mvp.MainMVP;
-import co.com.recuperacion_ciclo4_movil.view.MainActivity;
 import co.com.recuperacion_ciclo4_movil.view.dto.TaskItem;
 import co.com.recuperacion_ciclo4_movil.view.dto.TaskState;
 
 public class MainPresenter implements MainMVP.Presenter {
 
-    private MainMVP.View view;
-    private MainMVP.Model model;
+    private final MainMVP.View view;
+    private final MainMVP.Model model;
 
     public MainPresenter(MainMVP.View view){
         this.view = view;
@@ -43,10 +42,34 @@ public class MainPresenter implements MainMVP.Presenter {
     }
 
     @Override
-    public void taskItemClicked(TaskItem item) {
-        item.setState(TaskState.DONE);
+    public void taskItemClicked(TaskItem task) {
+        String message = task.getState() == TaskState.PENDING
+                ? "TERMINADA"
+                : "ELIMINAR";
+        view.showConfirmDialog("¿Qué desea hacer?", task);
+        //view.showDeleteDialog(message, task);
 
-        model.updateTask(item);
-        view.updateTask(item);
+
     }
+
+    @Override
+    public void updateTask(TaskItem task) {
+        task.setState(task.getState() == TaskState.PENDING ? TaskState.DONE : TaskState.PENDING);
+
+        model.updateTask(task);
+        view.updateTask(task);
+
+
+    }
+
+    @Override
+    public void deleteTask(TaskItem task) {
+        model.deleteTask(task);
+        view.deleteTask(task);
+    }
+
+
 }
+
+
+
