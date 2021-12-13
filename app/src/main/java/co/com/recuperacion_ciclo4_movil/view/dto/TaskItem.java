@@ -39,8 +39,7 @@ public class TaskItem {
         TaskItem item = (TaskItem) o;
         return description.equals(item.description) && date.equals(item.date) && state == item.state;
     }
-
-
+    //
 
     @Override
     public int hashCode() {

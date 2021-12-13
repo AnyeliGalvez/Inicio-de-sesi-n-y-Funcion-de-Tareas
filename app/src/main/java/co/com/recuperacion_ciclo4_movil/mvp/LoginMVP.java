@@ -23,7 +23,7 @@ public interface LoginMVP {
 
 
     }
-
+//
     interface View{
         Activity getActivity();
         LoginInfo getLoginInfo();

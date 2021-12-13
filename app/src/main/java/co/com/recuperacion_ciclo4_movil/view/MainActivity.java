@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
         initUI();
         presenter.loadTasks();
     }
+    //
 
     @Override
     public void onBackPressed() {
