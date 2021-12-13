@@ -3,12 +3,15 @@ package co.com.recuperacion_ciclo4_movil.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -18,6 +21,9 @@ import co.com.recuperacion_ciclo4_movil.presenter.LoginPresenter;
 import co.com.recuperacion_ciclo4_movil.view.MainActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginMVP.View {
+
+    private LinearProgressIndicator piWaiting;
+
     private ImageView RClogo;
     private TextInputLayout tilEmail;
     private TextInputEditText etEmail;
@@ -39,6 +45,9 @@ public class LoginActivity extends AppCompatActivity implements LoginMVP.View {
     }
 
     private void initUI() {
+
+        piWaiting = findViewById(R.id.pi_waiting);
+
         RClogo  = findViewById(R.id.RClogo);
 
         tilEmail = findViewById(R.id.til_Email);
@@ -53,6 +62,10 @@ public class LoginActivity extends AppCompatActivity implements LoginMVP.View {
     }
 
 
+    @Override
+    public Activity getActivity() {
+        return this;
+    }
 
     @Override
     public LoginMVP.LoginInfo getLoginInfo() {
@@ -86,5 +99,15 @@ public class LoginActivity extends AppCompatActivity implements LoginMVP.View {
     public void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void startWaiting() {
+        piWaiting.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void stopWaiting() {
+        piWaiting.setVisibility(View.GONE);
     }
 }

@@ -1,5 +1,7 @@
 package co.com.recuperacion_ciclo4_movil.mvp;
 
+import android.app.Activity;
+
 public interface LoginMVP {
 
     interface Model{
@@ -19,6 +21,7 @@ public interface LoginMVP {
     }
 
     interface View{
+        Activity getActivity();
         LoginInfo getLoginInfo();
         void showEmailError(String error);
         void showPasswordError(String error);
@@ -27,11 +30,15 @@ public interface LoginMVP {
         void clearData();
 
         void openMainActivity();
+
+        void startWaiting();
+
+        void stopWaiting();
     }
 
     class LoginInfo {
-        private String email;
-        private String password;
+        private final String email;
+        private final String password;
 
         public LoginInfo(String email, String password){
             this.email = email;

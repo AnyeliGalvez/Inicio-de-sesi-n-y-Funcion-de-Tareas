@@ -40,17 +40,26 @@ public class LoginPresenter implements LoginMVP.Presenter {
         }
 
         if(!error) {
+            view.startWaiting();
             model.validateCredentials(loginInfo.getEmail().trim(),
                     loginInfo.getPassword().trim(), new LoginMVP.Model.ValidateCredentialsCallback() {
                         @Override
                         public void onSuccess() {
-                            view.openMainActivity();
+                            view.getActivity().runOnUiThread(() -> {
+                                view.stopWaiting();
+                                view.openMainActivity();
+                            });
+
 
                         }
 
                         @Override
                         public void onFailure(String error) {
-                            view.showGeneralError(error);
+                            view.getActivity().runOnUiThread(() ->{
+                                view.showGeneralError(error);
+                                view.stopWaiting();
+                            });
+
                         }
                     });
         }
