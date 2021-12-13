@@ -2,6 +2,8 @@ package co.com.recuperacion_ciclo4_movil.mvp;
 
 import android.app.Activity;
 
+import co.com.recuperacion_ciclo4_movil.view.MainActivity;
+
 public interface LoginMVP {
 
     interface Model{
@@ -15,6 +17,8 @@ public interface LoginMVP {
     }
 
     interface Presenter{
+        void isLogged();
+
         void LoginWithEmail();
 
 
@@ -32,8 +36,8 @@ public interface LoginMVP {
         void openMainActivity();
 
         void startWaiting();
-
         void stopWaiting();
+
     }
 
     class LoginInfo {

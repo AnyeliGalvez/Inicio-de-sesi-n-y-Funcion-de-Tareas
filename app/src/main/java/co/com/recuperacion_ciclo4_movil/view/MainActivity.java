@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -14,6 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.List;
 
 import co.com.recuperacion_ciclo4_movil.R;
+import co.com.recuperacion_ciclo4_movil.mvp.LoginMVP;
 import co.com.recuperacion_ciclo4_movil.mvp.MainMVP;
 import co.com.recuperacion_ciclo4_movil.presenter.MainPresenter;
 import co.com.recuperacion_ciclo4_movil.view.adapter.TaskAdapter;
@@ -21,6 +26,8 @@ import co.com.recuperacion_ciclo4_movil.view.dto.TaskItem;
 
 
 public class MainActivity extends AppCompatActivity implements MainMVP.View {
+    private MainMVP.View view;
+    private MainMVP.Model model;
 
     private TextInputLayout tilNewTask;
     private TextInputEditText etNewTask;
@@ -37,9 +44,28 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
         presenter = new MainPresenter(MainActivity.this);
 
+
         initUI();
         presenter.loadTasks();
     }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("¿Desea cerrar sesión?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                            MainActivity.super.onBackPressed();
+
+                        }
+
+
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
 
     private void initUI() {
         tilNewTask = findViewById(R.id.til_new_task);
@@ -56,8 +82,14 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
 
     @Override
+    public Activity getActivity() {
+        return this;
+    }
+
+    @Override
     public void showTaskList(List<TaskItem> items) {
         taskAdapter.setData(items);
+
     }
 
     @Override
@@ -115,6 +147,9 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
     public void showDeleteDialog(String message, TaskItem task) {
 
     }*/
+
+
+
 
 
 }

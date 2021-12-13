@@ -1,5 +1,7 @@
 package co.com.recuperacion_ciclo4_movil.mvp;
 
+import android.app.Activity;
+
 import java.util.List;
 
 import co.com.recuperacion_ciclo4_movil.view.dto.TaskItem;
@@ -14,9 +16,13 @@ public interface MainMVP {
         void updateTask(TaskItem item);
 
         void deleteTask(TaskItem task);
+
+
+
     }
 
     interface Presenter{
+
         void loadTasks();
 
         void addNewTask();
@@ -30,6 +36,8 @@ public interface MainMVP {
     }
 
     interface View{
+        Activity getActivity();
+
 
         void showTaskList(List<TaskItem> items);
 
@@ -44,6 +52,14 @@ public interface MainMVP {
         void deleteTask(TaskItem task);
 
 
+
+
+
+
+
+
         //void showDeleteDialog(String message, TaskItem task);
     }
+
+
 }
