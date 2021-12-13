@@ -10,4 +10,7 @@
 
     <color name="task_red_pending">#E40202</color>
     <color name="task_green_done">#01AC07</color>
+
+    <color name="btn_email">#0E80E3</color>
+
 </resources>

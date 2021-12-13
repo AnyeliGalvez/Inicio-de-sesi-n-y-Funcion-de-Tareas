@@ -1,8 +1,10 @@
 package co.com.recuperacion_ciclo4_movil.view;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -72,4 +74,53 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
     public void updateTask(TaskItem task) {
         taskAdapter.updateTask(task);
     }
+
+    @Override
+    public void showConfirmDialog(String message, TaskItem task) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+
+        builder.setTitle("Mis Tareas")
+                .setMessage("¿Qué desea hacer?")
+
+
+                .setPositiveButton("TERMINADA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                             presenter.updateTask(task);
+
+                    }
+                })
+                .setNegativeButton("ELIMINAR", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.deleteTask(task);
+                    }
+                })
+
+                .setNeutralButton("CANCELAR", null)
+
+                .show();
+
+
+    }
+
+    @Override
+    public void deleteTask(TaskItem task) {
+        taskAdapter.removeTask(task);
+    }
+
+    /*@Override
+    public void showDeleteDialog(String message, TaskItem task) {
+
+    }*/
+
+
 }
+
+
+
+
+
+

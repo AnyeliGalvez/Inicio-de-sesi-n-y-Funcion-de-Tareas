@@ -29,4 +29,11 @@ public class MainInteractor implements MainMVP.Model {
     public void updateTask(TaskItem item) {
 
     }
+
+    @Override
+    public void deleteTask(TaskItem task) {
+
+    }
+
+
 }

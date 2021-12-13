@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:hint="Enter task description"
+        android:hint="Agregar una nueva tarea"
         app:endIconDrawable="@android:drawable/ic_input_add"
         app:endIconMode="custom"
         app:layout_constraintEnd_toEndOf="parent"
