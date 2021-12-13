@@ -1,5 +1,8 @@
 package co.com.recuperacion_ciclo4_movil.view.dto;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.Objects;
 
 public class TaskItem {
@@ -36,6 +39,8 @@ public class TaskItem {
         TaskItem item = (TaskItem) o;
         return description.equals(item.description) && date.equals(item.date) && state == item.state;
     }
+
+
 
     @Override
     public int hashCode() {

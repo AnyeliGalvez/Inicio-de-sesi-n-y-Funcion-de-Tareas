@@ -1,5 +1,7 @@
 package co.com.recuperacion_ciclo4_movil.presenter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -7,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import co.com.recuperacion_ciclo4_movil.model.MainInteractor;
+import co.com.recuperacion_ciclo4_movil.mvp.LoginMVP;
 import co.com.recuperacion_ciclo4_movil.mvp.MainMVP;
 import co.com.recuperacion_ciclo4_movil.view.dto.TaskItem;
 import co.com.recuperacion_ciclo4_movil.view.dto.TaskState;
@@ -20,6 +23,9 @@ public class MainPresenter implements MainMVP.Presenter {
         this.view = view;
         this.model = new MainInteractor();
     }
+
+
+
 
     @Override
     public void loadTasks() {
@@ -39,7 +45,12 @@ public class MainPresenter implements MainMVP.Presenter {
         model.saveTask(task);
         view.addTaskToList(task);
 
+
+
     }
+
+
+
 
     @Override
     public void taskItemClicked(TaskItem task) {

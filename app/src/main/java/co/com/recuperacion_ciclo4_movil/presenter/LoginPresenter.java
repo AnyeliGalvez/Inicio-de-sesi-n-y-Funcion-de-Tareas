@@ -1,12 +1,22 @@
 package co.com.recuperacion_ciclo4_movil.presenter;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
 
 import co.com.recuperacion_ciclo4_movil.model.LoginInteractor;
 import co.com.recuperacion_ciclo4_movil.mvp.LoginMVP;
+import co.com.recuperacion_ciclo4_movil.view.LoginActivity;
+import co.com.recuperacion_ciclo4_movil.view.MainActivity;
 
 public class LoginPresenter implements LoginMVP.Presenter {
+
+    private final static String AUTH_PREFERENCES = "authentication";
+    private final static String LOGGED = "logged";
 
     private LoginMVP.View view;
     private LoginMVP.Model model;
@@ -15,6 +25,20 @@ public class LoginPresenter implements LoginMVP.Presenter {
         this.view = view;
         this.model = new LoginInteractor();
     }
+
+    @Override
+    public void isLogged() {
+        SharedPreferences preferences = view.getActivity()
+                .getSharedPreferences(AUTH_PREFERENCES, Context.MODE_PRIVATE);
+        boolean isLogged = preferences.getBoolean(LOGGED, false);
+        if(isLogged) {
+            view.openMainActivity();
+
+        }
+
+
+    }
+
 
     @Override
     public void LoginWithEmail() {
@@ -40,21 +64,37 @@ public class LoginPresenter implements LoginMVP.Presenter {
         }
 
         if(!error) {
+            view.startWaiting();
             model.validateCredentials(loginInfo.getEmail().trim(),
                     loginInfo.getPassword().trim(), new LoginMVP.Model.ValidateCredentialsCallback() {
                         @Override
                         public void onSuccess() {
-                            view.openMainActivity();
+                            SharedPreferences preferences = view.getActivity()
+                                    .getSharedPreferences(AUTH_PREFERENCES, Context.MODE_PRIVATE);
+                            preferences.edit()
+                                    .putBoolean(LOGGED, true)
+                                    .apply();
+
+                            view.getActivity().runOnUiThread(() -> {
+                                view.stopWaiting();
+                                view.openMainActivity();
+                            });
+
 
                         }
 
                         @Override
                         public void onFailure(String error) {
-                            view.showGeneralError(error);
+                            view.getActivity().runOnUiThread(() ->{
+                                view.showGeneralError(error);
+                                view.stopWaiting();
+                            });
+
                         }
                     });
         }
     }
+
 
 
 
