@@ -17,7 +17,7 @@ public class LoginInteractor implements LoginMVP.Model {
     }
 
 
-
+//
     @Override
     public void validateCredentials(String email, String password, ValidateCredentialsCallback callback) {
         if(users.get(email) != null
