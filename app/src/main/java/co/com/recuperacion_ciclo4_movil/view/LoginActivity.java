@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.errorprone.annotations.Var;
 
 import co.com.recuperacion_ciclo4_movil.R;
 import co.com.recuperacion_ciclo4_movil.mvp.LoginMVP;
@@ -37,13 +38,15 @@ public class LoginActivity extends AppCompatActivity implements LoginMVP.View {
 
     private LoginMVP.Presenter presenter;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         presenter = new LoginPresenter(this);
-        presenter.isLogged();
+        //presenter.isLogged();
 
         initUI();
     }

@@ -58,9 +58,7 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                             MainActivity.super.onBackPressed();
-
                         }
-
 
                 })
                 .setNegativeButton("No", null)

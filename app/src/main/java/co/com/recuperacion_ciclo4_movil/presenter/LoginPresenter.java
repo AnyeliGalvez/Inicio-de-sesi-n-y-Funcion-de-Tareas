@@ -26,7 +26,7 @@ public class LoginPresenter implements LoginMVP.Presenter {
         this.model = new LoginInteractor();
     }
 
-    @Override
+    /*@Override
     public void isLogged() {
         SharedPreferences preferences = view.getActivity()
                 .getSharedPreferences(AUTH_PREFERENCES, Context.MODE_PRIVATE);
@@ -37,7 +37,7 @@ public class LoginPresenter implements LoginMVP.Presenter {
         }
 
 
-    }
+    }*/
 
 
     @Override
@@ -69,11 +69,11 @@ public class LoginPresenter implements LoginMVP.Presenter {
                     loginInfo.getPassword().trim(), new LoginMVP.Model.ValidateCredentialsCallback() {
                         @Override
                         public void onSuccess() {
-                            SharedPreferences preferences = view.getActivity()
+                           /* SharedPreferences preferences = view.getActivity()
                                     .getSharedPreferences(AUTH_PREFERENCES, Context.MODE_PRIVATE);
                             preferences.edit()
                                     .putBoolean(LOGGED, true)
-                                    .apply();
+                                    .apply();*/
 
                             view.getActivity().runOnUiThread(() -> {
                                 view.stopWaiting();
