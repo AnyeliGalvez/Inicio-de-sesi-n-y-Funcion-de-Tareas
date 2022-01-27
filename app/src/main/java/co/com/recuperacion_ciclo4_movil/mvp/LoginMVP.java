@@ -17,7 +17,7 @@ public interface LoginMVP {
     }
 
     interface Presenter{
-        void isLogged();
+       // void isLogged();
 
         void LoginWithEmail();
 
